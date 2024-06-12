@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Mercadinho Inteligente",
+    "slug": "Mercadinho Inteligente",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "Mercadinho Inteligente"
+}
