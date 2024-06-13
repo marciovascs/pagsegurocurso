@@ -89,8 +89,6 @@ const PagarScreen: React.FC<Props> = ({ name, baseEnthusiasmLevel = 0 }) => {
     // FIM TESTE LOCAL - comentar para subir.
 
 
-
-
     if(payment.message) {
       let mensagem = payment.message;
       console.log('!!! Tem payment !!!');
