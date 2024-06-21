@@ -337,12 +337,13 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginBottom: 90,
     fontWeight: 'bold',
-    borderColor: '#000',
+    borderColor: '#f5cd77',
     borderWidth: 1,
     borderRadius: 10,
     padding: 10,
-    backgroundColor: '#00a',
-    color: '#fff'
+    backgroundColor: '#f3ab55',
+    // backgroundColor: '#00a',
+    color: '#444'
   },
   input: {
     width: Dimensions.get('window').width * 0.8,

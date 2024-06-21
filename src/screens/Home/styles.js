@@ -94,7 +94,7 @@ export const MessageText = styled.Text`
   color: #000;
   text-align: center;
   font-weight: bold;
-  padding-bottom: 80px;
-  padding-top: 80px;
+  padding-bottom: 20px;
+  padding-top: 20px;
   
 `;

@@ -197,7 +197,7 @@ export default () => {
           <>
           <CenteredMessage>
             
-            <MessageText>1 - Passe os produtos no leitor de código de barras</MessageText>
+            <MessageText>1 - Passe o código de barras dos produtos no leitor</MessageText>
             
             <MessageText>2 - Clique em Pagar</MessageText>
           </CenteredMessage>
@@ -246,36 +246,62 @@ export default () => {
                     justifyContent: 'center',
                   }}>
                   <TouchableOpacity
-                    onPress={() => handleDelete(item.id, item.value)}>
-                    {/* <ImgExcluir width={30} height={30} /> */}
-                    <Text>x</Text>
+                    onPress={() => handleDelete(item.id, item.value)}
+                    style={{ 
+                      width: 30,
+                      height: 35,
+                      backgroundColor: '#f00',
+                      justifyContent: 'center', // Centraliza verticalmente
+                      alignItems: 'center', // Centraliza horizontalmente
+                      borderColor: '#000',
+                      borderWidth: 1,
+                      borderRadius: 10,
+                    }}>
+                    <Text 
+                      style={{ 
+                        fontSize: 23, // Ajuste o tamanho da fonte para caber bem no contêiner
+                        color: '#000',
+                        fontWeight: 'bold',
+                      }}>
+                      x
+                    </Text>
                   </TouchableOpacity>
+
                 </View>
               </RowContainer>
             ))}
           </ScrollView>
-          <View style={{padding: 10, alignItems: 'center'}}>
-            <Text style={{fontSize: 30, fontWeight: 'bold', color: '#000066'}}>
-              Total: R$ {totalValue.toFixed(2)}
-            </Text>
-          </View>
-          <View
-            style={{
-              padding: 10,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
+          
 
-            <BotaoPagar onPress={handleGoToPayment}>
-              <CustomButtonText>Pagar</CustomButtonText>
-            </BotaoPagar>
+          {productList.length > 0 && (
+            <>
+              <View style={{padding: 10, alignItems: 'center'}}>
+                <Text style={{fontSize: 30, fontWeight: 'bold', color: '#000066'}}>
+                  Total: R$ {totalValue.toFixed(2)}
+                </Text>
+              </View>
+              <View
+                style={{
+                  padding: 10,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}>
 
-            {/* <BotaoSair onPress={handleSignOut}>
-              <CustomButtonText>Sair</CustomButtonText>
-            </BotaoSair> */}
+                <BotaoPagar onPress={handleGoToPayment}>
+                  <CustomButtonText>Pagar</CustomButtonText>
+                </BotaoPagar>
+
+                {/* <BotaoSair onPress={handleSignOut}>
+                  <CustomButtonText>Sair</CustomButtonText>
+                </BotaoSair> */}
 
 
-          </View>
+              </View>
+            </>
+          )}
+
+
+
         </View>
       </View>
       {isLoading && (
