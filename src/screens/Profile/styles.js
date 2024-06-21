@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import {Dimensions} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
-const imageLogoInstagram = width * 0.25;
+const imageLogoInstagram = width * 0.08;
 const imageLogoMercadinhoInteligente = width * 0.5;
 
 
@@ -97,7 +97,7 @@ export const LogoInstagram = styled.Image`
   height: ${imageLogoInstagram}px;
   resize-mode: contain;
   margin-bottom: 0px;
-  border-radius: 30px;
+  border-radius: 10px;
 `;
 
 export const LogoMercadinhoInteligente = styled.Image`
@@ -111,7 +111,7 @@ export const LogoMercadinhoInteligente = styled.Image`
 export const StyledTextToqueNaTela = styled.Text`
   font-size: 24px;
   color: #cc0000;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   font-weight: bold;
 `;
 
@@ -119,7 +119,8 @@ export const StyledTextSejaBemVindo = styled.Text`
   font-size: 25px;
   font-weight: bold;
   color: #000088;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
+  margin-top: 40px;
 `;
 
 export const StyledTextMercadinhoInteligente = styled.Text`
@@ -131,11 +132,11 @@ export const StyledTextMercadinhoInteligente = styled.Text`
 `;
 
 export const ImageWrapper = styled.View`
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 `;
 
 export const TextWrapper = styled.View`
-  margin-bottom: 5px;
+  margin-bottom: 25px;
   justify-content: center;
   align-items: center;
 `;

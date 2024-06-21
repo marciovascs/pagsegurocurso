@@ -16,11 +16,13 @@ export const CustomButton = styled.TouchableOpacity`
   border-radius: 30px;
   justify-content: center;
   align-items: center;
+  font-weight: bold;
 `;
 
 export const CustomButtonText = styled.Text`
   font-size: 25px;
   color: #fff;
+  font-weight: bold;
 `;
 
 export const DeleteButton = styled.TouchableOpacity`

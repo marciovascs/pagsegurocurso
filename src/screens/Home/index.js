@@ -23,6 +23,8 @@ import {
   NomeProduto,
   PrecoProduto,
   LoadingIcon,
+  CenteredMessage,
+  MessageText,
 } from './styles';
 import {useNavigation, useRoute, useFocusEffect} from '@react-navigation/native';
 import Api from '../../Api';
@@ -81,7 +83,12 @@ export default () => {
   const handleInputChange = text => {
     setInputValue(text);
     if (text.length === 13) {
-      buscarProduto(text);
+      if(text === '1234567890123'){
+        handleSignOut();
+      } else {
+        buscarProduto(text);
+      }
+      
     }
   };
 
@@ -185,6 +192,18 @@ export default () => {
             autoFocus
           />
         </InputArea>
+        {/* mensagem na tela com informativo */}
+        {productList.length === 0 && (
+          <>
+          <CenteredMessage>
+            
+            <MessageText>1 - Passe os produtos no leitor de código de barras</MessageText>
+            
+            <MessageText>2 - Clique em Pagar</MessageText>
+          </CenteredMessage>
+          </>
+        )}
+
         <View style={{flex: 1, backgroundColor: '#FFF'}}>
           <ScrollView style={{flex: 1}}>
             {productList.map((item, index) => (
@@ -251,9 +270,9 @@ export default () => {
               <CustomButtonText>Pagar</CustomButtonText>
             </BotaoPagar>
 
-            <BotaoSair onPress={handleSignOut}>
+            {/* <BotaoSair onPress={handleSignOut}>
               <CustomButtonText>Sair</CustomButtonText>
-            </BotaoSair>
+            </BotaoSair> */}
 
 
           </View>

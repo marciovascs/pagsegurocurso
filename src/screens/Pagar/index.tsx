@@ -18,7 +18,7 @@ import {
   CustomButtonText,
   LoadingIcon,
   InputArea,
-} from '../Home/styles'; // Importando estilos
+} from '../Pagar/styles'; // Importando estilos
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import Api from '../../Api';
 import PlugPag from "../../../utils/PlugPag"
@@ -75,7 +75,6 @@ const PagarScreen: React.FC<Props> = ({ name, baseEnthusiasmLevel = 0 }) => {
     console.log(payment);
     console.log('fim do payment: ');
     console.log('verificar o retorno... ');
-
 
 
     // TESTE LOCAL - comentar TUDO para subir.
@@ -274,6 +273,7 @@ const PagarScreen: React.FC<Props> = ({ name, baseEnthusiasmLevel = 0 }) => {
 
 
       <View style={styles.center}>
+        <Text style={styles.formaPagamentoText}>Selecione a forma de pagamento</Text>
         <Text style={styles.totalText}>Total: R$ {totalValue.toFixed(2)}</Text>
         {/* <TextInput
           style={styles.input}
@@ -328,8 +328,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   totalText: {
-    fontSize: 24,
+    fontSize: 35,
     marginBottom: 20,
+    fontWeight: 'bold',
+  },
+  formaPagamentoText: {
+    textAlign: 'center', 
+    fontSize: 25,
+    marginBottom: 90,
+    fontWeight: 'bold',
+    borderColor: '#000',
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    backgroundColor: '#00a',
+    color: '#fff'
   },
   input: {
     width: Dimensions.get('window').width * 0.8,
@@ -355,7 +368,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   backButtonText: {
-    fontSize: 18,
+    fontSize: 22,
+    fontWeight: 'bold',
     color: '#268596',
   },
   loadingOverlay: {
