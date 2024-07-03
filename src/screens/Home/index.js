@@ -98,14 +98,24 @@ export default () => {
 
     console.log( 'código = ' + codigoDeBarras); // Aqui está o valor do TextInput
 
-    buscarProduto(codigoDeBarras);
+    if( codigoDeBarras == '12345678901234567890' ){
+      handleSignOut();
+    } else {
+      buscarProduto(codigoDeBarras);
+    }
+
+    // if( codigoDeBarras != '' ){
+      // buscarProduto(codigoDeBarras);
+    // }
+
+    
 
     // // Voltar o foco para o TextInput
     // inputRef.current.focus();
 
     // Definindo o foco após um pequeno atraso para garantir que a renderização seja concluída
     const timer = setTimeout(focusOnInput, 100);
-
+    // focusOnInput;
     
 
   };
@@ -233,6 +243,7 @@ export default () => {
             value={inputValue}
             // onChangeText={handleInputChange}
             // onSubmitEditing={teste}
+            showSoftInputOnFocus={false} // Desabilita o teclado ao focar (somente em Android)
             onSubmitEditing={handleEnter}
             placeholder="Produto"
             keyboardType="numeric"
