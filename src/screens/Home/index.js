@@ -208,7 +208,7 @@ export default () => {
 
     // Definindo o foco após um pequeno atraso para garantir que a renderização seja concluída
     const timer = setTimeout(focusOnInput, 100);
-    
+
   };
 
   const handleGoToPayment = () => {
@@ -231,7 +231,7 @@ export default () => {
               textAlign: 'center',
             }}
             value={inputValue}
-            onChangeText={handleInputChange}
+            // onChangeText={handleInputChange}
             // onSubmitEditing={teste}
             onSubmitEditing={handleEnter}
             placeholder="Produto"
