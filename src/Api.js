@@ -5,8 +5,8 @@ if (Platform.OS === 'ios') {
 } else {
   var ip = '10.0.2.2'; // url das apis do sistema mercadinho
 }
-const BASE_API = 'https://mercadinhointeligente.com.br/api'; // url das apis do sistema mercadinho
-// const BASE_API = 'http://' + ip + ':8000/api'; // url das apis do sistema mercadinho
+// const BASE_API = 'https://mercadinhointeligente.com.br/api'; // url das apis do sistema mercadinho
+const BASE_API = 'http://' + ip + ':8000/api'; // url das apis do sistema mercadinho
 
 // requisições
 export default {

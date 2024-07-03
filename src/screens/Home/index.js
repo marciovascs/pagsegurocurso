@@ -36,9 +36,9 @@ const BASE_API = 'https://mercadinhointeligente.com.br'; // url
 
 export default () => {
 
-  console.log('entrou no index do Home...');
+  // console.log('entrou no index do Home...');
 
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue, setTextInputValue] = useState('');
   const [productList, setProductList] = useState([]);
   const [totalValue, setTotalValue] = useState(0);
   const [isLoading, setIsLoading] = useState(false); // Novo estado de carregamento
@@ -48,6 +48,9 @@ export default () => {
 
   // Atualiza o estado com os parâmetros recebidos da navegação
   useEffect(() => {
+
+    console.log('entrou no useEffect do Home...');
+
     if (
       route.params?.totalValue !== undefined &&
       route.params?.productList !== undefined
@@ -80,16 +83,65 @@ export default () => {
     });
   };
 
+  // Função para definir o foco no TextInput
+  const focusOnInput = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
+  const handleEnter = (event) => {
+    console.log('!!! Entrou no handleEnter !!!');
+    // console.log(event.nativeEvent.text); // Aqui está o valor do TextInput
+
+    let codigoDeBarras = event.nativeEvent.text;
+
+    console.log( 'código = ' + codigoDeBarras); // Aqui está o valor do TextInput
+
+    if( codigoDeBarras == '12345678901234567890' ){
+      handleSignOut();
+    } else {
+      buscarProduto(codigoDeBarras);
+    }
+
+    // if( codigoDeBarras != '' ){
+      // buscarProduto(codigoDeBarras);
+    // }
+
+    
+
+    // // Voltar o foco para o TextInput
+    // inputRef.current.focus();
+
+    // Definindo o foco após um pequeno atraso para garantir que a renderização seja concluída
+    const timer = setTimeout(focusOnInput, 100);
+    // focusOnInput;
+    
+
+  };
+
+
   const handleInputChange = text => {
     setInputValue(text);
-    if (text.length === 13) {
-      if(text === '1234567890123'){
-        handleSignOut();
-      } else {
-        buscarProduto(text);
-      }
-      
+
+    let textAux = '';
+
+    if(text != textAux){
+      textAux = text;
+    } else {
+      buscarProduto(text);
     }
+
+
+
+    // if (text.length === 13) {
+    //   if(text === '1234567890123'){
+    //     handleSignOut();
+    //   } else {
+    //     buscarProduto(text);
+    //   }
+      
+    // }
   };
 
   const buscarProduto = async text => {
@@ -163,6 +215,10 @@ export default () => {
       prevProductList.filter(item => item.id !== id),
     );
     setTotalValue(prevTotalValue => prevTotalValue - value);
+
+    // Definindo o foco após um pequeno atraso para garantir que a renderização seja concluída
+    const timer = setTimeout(focusOnInput, 100);
+
   };
 
   const handleGoToPayment = () => {
@@ -185,10 +241,13 @@ export default () => {
               textAlign: 'center',
             }}
             value={inputValue}
-            onChangeText={handleInputChange}
+            // onChangeText={handleInputChange}
+            // onSubmitEditing={teste}
+            showSoftInputOnFocus={false} // Desabilita o teclado ao focar (somente em Android)
+            onSubmitEditing={handleEnter}
             placeholder="Produto"
             keyboardType="numeric"
-            maxLength={13}
+            maxLength={20}
             autoFocus
           />
         </InputArea>
