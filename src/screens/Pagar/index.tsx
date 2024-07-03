@@ -77,6 +77,7 @@ const PagarScreen: React.FC<Props> = ({ name, baseEnthusiasmLevel = 0 }) => {
     console.log('verificar o retorno... ');
 
 
+
     // TESTE LOCAL - comentar TUDO para subir.
     // payment.message = 'PROCESSANDO';
     // payment.message = 'APROXIME, INSIRA OU PASSE O CARTÃO';
