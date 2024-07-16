@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+// import { BleManager } from 'react-native-ble-plx';
 import {
   PermissionsAndroid,
   View,
@@ -76,6 +77,21 @@ export default () => {
       return () => clearTimeout(timer);
     }, [inputRef])
   );
+
+
+  // permissões para bluetooth
+  async function requestPermissions() {
+    if (Platform.OS === 'android') {
+      await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
+      if (Platform.Version >= 31) {
+        await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN);
+        await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT);
+        await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.BLUETOOTH_ADVERTISE);
+      }
+    }
+  }
+  requestPermissions();
+
 
   const handleSignOut = () => {
     navigation.reset({
