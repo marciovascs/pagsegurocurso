@@ -76,8 +76,6 @@ const PagarScreen: React.FC<Props> = ({ name, baseEnthusiasmLevel = 0 }) => {
     console.log('fim do payment: ');
     console.log('verificar o retorno... ');
 
-
-
     // TESTE LOCAL - comentar TUDO para subir.
     // payment.message = 'PROCESSANDO';
     // payment.message = 'APROXIME, INSIRA OU PASSE O CARTÃO';
@@ -88,24 +86,60 @@ const PagarScreen: React.FC<Props> = ({ name, baseEnthusiasmLevel = 0 }) => {
     // payment.message = 'RETIRE O CARTÃO';
     // FIM TESTE LOCAL - comentar para subir.
 
-
     if(payment.message) {
       let mensagem = payment.message;
+      let mensagemAbort = 'TEMPO ESGOTADO';
+
       console.log('!!! Tem payment !!!');
       console.log(mensagem);
 
       setModalMessage(mensagem);
       setModalVisible(true);
+
+      // quando ainda não tiver um id da transação, vamos veirificar o timeout
+      if (!payment?.transactionId) {
+
+        // Adicionando timeout para esconder a modal e exibir a mensagemAbort por 5 segundos
+        const timeoutId1 = setTimeout(() => {
+
+          // aqui esgotou o tempo - sumir com o modal
+          setModalVisible(false);
+
+          // mostrar o modal com a mensagem do abort
+          setModalMessage(mensagemAbort);
+          setModalVisible(true);
+
+          const timeoutId2 = setTimeout(() => {
+
+            // Adicionando timeout para esconder a nova modal e chamar abort()
+            setTimeout(() => {
+              // 
+              setModalVisible(false);
+              abort();
+              handleBack();
+            }, 4000); // 4 segundos
+          }, 0);
+
+          // Cleanup do segundo timeout
+          return () => clearTimeout(timeoutId2);
+
+        }, 30000); // 30 segundos sem iteração do usuário
+
+        // Cleanup do primeiro timeout
+        return () => clearTimeout(timeoutId1);
+        
+      }
+
     }
+
+    console.log('ok, passou do timeout!');
 
     // Verificar se a transação foi finalizada
     if (payment?.transactionId) {
       // Aqui tudo certo. Vamos enviar o usuário para a página final.
 
       console.log('Entrou no transaction id. Id = ' + payment.transactionId);
-
       console.log(payment);
-
       console.log("DEU BOM");
 
       setModalVisible(false);
@@ -119,9 +153,6 @@ const PagarScreen: React.FC<Props> = ({ name, baseEnthusiasmLevel = 0 }) => {
         terminalSerial: payment.terminalSerialNumber,
       }); */
       /*     setOpen(false); */
-
-
-
 
     } else if (payment?.errorCode && payment?.errorCode !== "0000") {
 
@@ -216,6 +247,8 @@ const PagarScreen: React.FC<Props> = ({ name, baseEnthusiasmLevel = 0 }) => {
     console.log('entrou no abort...');
 
     MakeTransaction.abort((e: any) => console.log(e));
+
+    console.log('vai sair do abort');
   }
 
   const handleFinalize = () => {
