@@ -71,17 +71,21 @@ export default {
     return json;
   },
   // buscar produto
-  buscarProduto: async codigoDeBarra => {
+  // buscarProduto: async codigoDeBarra => {
+  buscarProduto: async (codigoDeBarra, user) => {
+
     console.log('entrou na api buscarProduto...');
     console.log('codigo de barra = ' + codigoDeBarra);
     // const req = await fetch(`${BASE_API}/user`, {
-    const req = await fetch(`${BASE_API}/produto/buscarProduto`, {
-      method: 'POST',
+      // const req = await fetch(`${BASE_API}/produto/buscarProduto`, {
+      const req = await fetch(`${BASE_API}/produto/buscarProdutoPrecoEstoque`, {
+          method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({codigoDeBarra}),
+      // body: JSON.stringify({codigoDeBarra}),
+      body: JSON.stringify({codigoDeBarra, user}),
     });
     const json = await req.json();
     return json;

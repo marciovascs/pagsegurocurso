@@ -119,21 +119,9 @@ export default () => {
     } else {
       buscarProduto(codigoDeBarras);
     }
-
-    // if( codigoDeBarras != '' ){
-      // buscarProduto(codigoDeBarras);
-    // }
-
     
-
-    // // Voltar o foco para o TextInput
-    // inputRef.current.focus();
-
     // Definindo o foco após um pequeno atraso para garantir que a renderização seja concluída
     const timer = setTimeout(focusOnInput, 100);
-    // focusOnInput;
-    
-
   };
 
 
@@ -161,23 +149,54 @@ export default () => {
   };
 
   const buscarProduto = async text => {
+
+    const user = await AsyncStorage.getItem('user');
+
+    console.log('usuário:');
+    console.log(user);
+
     if (text.trim() !== '') {
       setIsLoading(true); // Inicia o carregamento
-      let json = await Api.buscarProduto(text);
+      // let json = await Api.buscarProduto(text);
+      let json = await Api.buscarProduto(text, user);
+
       if (json.produto) {
         let produto = json.produto;
+
+        console.log('produto recebido - verificar');
+        console.log(produto);
 
         let idProduto = produto.id;
         let nomeProduto = produto.nome;
         let precoCompraProduto = produto.preco_compra;
+        let precoVendaProdutoMercadinho = produto.preco_venda_produto_mercadinho;
         let percentualLucroDesejado = produto.percentual_lucro_desejado;
         let caminhoImagemProduto = BASE_API + produto.caminho_imagem_produto;
 
-        let precoVenda =
+        /**
+         * verificar se veio a variável de preço do mercadinho.
+         * caso tenha vindo, vamos utiliza-la (precoVendaProdutoMercadinho)
+         * caso não tenha vindo ou tenha vindo zerada, vamos utilizar o preço normal, 
+         * cadastrado para todos os mercadinhos.
+         */
+        if( precoVendaProdutoMercadinho > 0 ){
+          // let precoVenda = parseFloat(precoVendaProdutoMercadinho);
+          console.log('preco venda produto mercadinho: ');
+          console.log(parseFloat(precoVendaProdutoMercadinho));
+          var precoVenda = parseFloat(precoVendaProdutoMercadinho);
+        } else {
+          var precoVenda =
           parseFloat(precoCompraProduto) +
           (parseFloat(precoCompraProduto) *
             parseFloat(percentualLucroDesejado)) /
             100;
+
+        }
+
+
+        console.log('preco venda:');
+        console.log(precoVenda);
+
 
         const product = {
           id: Date.now() + Math.random(), // Gera um id único para o sistema
